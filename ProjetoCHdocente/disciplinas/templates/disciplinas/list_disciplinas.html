@@ -1,0 +1,33 @@
+<html>
+    <head>
+        <title>Lista de Disciplinas Cadastradas</title>
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css">
+        <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css">
+    </head>
+    <body>
+        <div>
+            <h3>Disciplinas Cadastradas</h3>
+        </div>
+        
+        <table>
+            <thead>
+                <th>Disciplina</th>
+                <th>Carga Horaria</th>
+                <th>Período</th>
+                <th>Tipo</th>
+                <th>Curso</th>
+                <th>Área</th>
+            </thead>
+        {% for disciplina in Disciplinas %}
+            <tr>
+                <th><a href="">{{ disciplina.nome}}</a></th>
+                <th><a href="">{{ disciplina.cargaHoraria}}</a></th>
+                <th><a href="">{{ disciplina.periodo}}</a></th>
+                <th><a href="">{{ disciplina.tipoDisciplina}}</a></th>
+                <th><a href="">{{ disciplina.curso}}</a></th>
+                <th><a href="">{{ disciplina.area}}</a></th>
+            </tr>
+        {% endfor %}
+        </table>
+    </body>
+</html>

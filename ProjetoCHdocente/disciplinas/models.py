@@ -2,38 +2,43 @@ from django.conf import settings
 from django.db import models
 
 class Area(models.Model):
-    nomeArea =  models.CharField(max_length=50)
+    nome =  models.CharField(max_length=20)
+    def __str__(self) -> str:
+        return self.nome
 
 class Curso(models.Model):
-    nomeCurso = models.CharField(max_length=50)
+    nome = models.CharField(max_length=50)
     NumPeriodos = models.PositiveSmallIntegerField()
         
     def __str__(self) -> str:
-        return self.nomeCurso
+        return self.nome
 
 class Disciplina(models.Model):
-    nomeDisciplina = models.CharField(max_length = 50)
-    periodoDisciplina = models.PositiveSmallIntegerField()
-    curso = models.ForeignKey(Curso, on_delete = models.CASCADE)
-    area = models.ForeignKey(Area, on_delete = models.CASCADE)
+    nome = models.CharField(max_length = 50)
+    periodo = models.PositiveSmallIntegerField()
+    cargaHoraria = models.IntegerField()
+    curso = models.CharField(max_length = 50)
+    area = models.ForeignKey(Area, on_delete = models.DO_NOTHING)
+    tipo = models.CharField(max_length=50, default="Regular")
 
     def __str__(self) -> str:
-        return self.nomeDisciplina
+        return self.nome
 
 
 class Professor(models.Model):
-    nomeProfessor = models.CharField(max_length=100)
-    area = models.ForeignKey(Area, on_delete = models.CASCADE)
+    nome = models.CharField(max_length=100)
+    area = models.ForeignKey(Area, on_delete = models.DO_NOTHING)
 
-    #MinistraDisciplinas = models.Lista
+    MinistraDisciplinas = models.ManyToManyField(Disciplina)
     
     def __str__(self) -> str:
-        return self.nomeProfessor
+        return self.nome
 
 
 class Turma(models.Model):
-    codigo = models.CharField(max_length=50)
-    anoEntrada = models.PositiveSmallIntegerField()
+    curso = models.CharField(max_length=50)
+    anoEntrada = models.IntegerField()
+    SemestresNum = models.PositiveSmallIntegerField(default = 8)
 
     def __str__(self) -> str:
         return self.codigo
